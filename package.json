@@ -1,0 +1,27 @@
+{
+  "name": "restaurants",
+  "version": "1.0.0",
+  "description": "App that will provide useful information about restaurants to users.",
+  "main": "src/app.js",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VanessaNarciso/restaurants.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VanessaNarciso/restaurants/issues"
+  },
+  "homepage": "https://github.com/VanessaNarciso/restaurants#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0"
+  }
+}
