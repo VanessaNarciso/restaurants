@@ -8,9 +8,12 @@ const restaurant = require('./controllers/restaurant.js')
 
 router.get('/restaurants', restaurant.getRestaurants);
 router.post('/restaurants', restaurant.createRestaurant);
+
+router.get('/restaurants/statistics', restaurant.statistics);
 router.get('/restaurants/:id', restaurant.getRestaurant);
 router.put('/restaurants/:id', restaurant.updateRestaurant);
 router.delete('/restaurants/:id', restaurant.deleteRestaurant);
+
 
 
 router.get('/', (req, res) => {
