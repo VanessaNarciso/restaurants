@@ -1,34 +1,16 @@
+/* Vanessa Narciso Hidalgo 2020*/
+
 const express = require('express'); 
-const mysql = require('mysql'); 
 const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 3050;
-
-app.use(bodyParser.json());
+const router = require('./routes')
 
 const app = express();
+app.use(bodyParser.json());
 
+require('./config.js');
 
-
-
-//MySQL 
-const connection = mysql.createConnection({
-	host: 'localhost', 
-	user: 'root',
-	password: 'rootpass',
-	database: 'restaurants_information'
-}); 
-
-//Check connection 
-connection.connect(error => {
-	if(error) throw error; 
-	console.log('Database server running');
-}); 
-
+app.use(router);
 app.listen(PORT, () => console.log(`server running on port ${PORT}`));
-
-
-
-//rutas
-//config 
 
