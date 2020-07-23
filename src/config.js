@@ -3,7 +3,7 @@
 const mysql = require('mysql'); 
 
 //MySQL 
-const connection = mysql.createConnection({
+const dbconnection = mysql.createConnection({
 	host: 'us-cdbr-east-02.cleardb.com', 
 	user: 'b08125060c8160',
 	password: '7afa57bc',
@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
 //Check connection 
 
 function handleDisconnect() {
-  connection = mysql.createConnection(connection); // Recreate the connection, since
+  connection = mysql.createConnection(dbconnection); // Recreate the connection, since
                                                   // the old one cannot be reused.
 
   connection.connect(function(err) {              // The server is either down
