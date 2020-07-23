@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
 //Check connection 
 
 function handleDisconnect() {
-  connection = mysql.createConnection(db_config); // Recreate the connection, since
+  connection = mysql.createConnection(connection); // Recreate the connection, since
                                                   // the old one cannot be reused.
 
   connection.connect(function(err) {              // The server is either down
