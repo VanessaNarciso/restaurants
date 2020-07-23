@@ -3,6 +3,8 @@ const connection = require('../config.js');
 const geokit = require('geokit');
 const math = require('mathjs');
 
+
+//Get one restaurant
 const getRestaurant = function (req, res){
 	const{id }= req.params
 	const sql = `SELECT * FROM restaurants WHERE id = "${id}"`;
@@ -17,7 +19,7 @@ const getRestaurant = function (req, res){
 	});
 }
 
-
+//Get all the restaurants 
 const getRestaurants = function (req, res){
 	const sql = 'SELECT * FROM restaurants';
 	connection.query(sql, (error,results) => {
@@ -30,6 +32,7 @@ const getRestaurants = function (req, res){
 	});
 }
 
+//Create Method 
 const createRestaurant = function (req, res){
 	const sql = 'INSERT INTO restaurants SET ?'; 
 	const restaurantObj = {
@@ -52,6 +55,7 @@ const createRestaurant = function (req, res){
 	});
 }
 
+//Update method no constrictions 
 const updateRestaurant = function (req, res){
 	const{id} = req.params;
 	const{ rating, name, site, email, phone, street, city, state, lat, lng} = req.body;
@@ -63,6 +67,8 @@ const updateRestaurant = function (req, res){
 
 
 }
+
+//Delete restaurants 
 const deleteRestaurant = function (req, res){
 
 	const {id} = req.params;
@@ -73,6 +79,7 @@ const deleteRestaurant = function (req, res){
 	});
 }
 
+//Statistics AVG , COUNT, STND
 const statistics = function (req, res){
 	const latstat = parseFloat(req.query.latitude);
 	const lngstat = parseFloat(req.query.longitude);
@@ -82,6 +89,8 @@ const statistics = function (req, res){
 	let distance = 0;
 	let inRadio = [];
 	const sql = 'SELECT * FROM restaurants';
+
+	//Create a list of restaurants inside the radius 
 	connection.query(sql, (error,results) => {
 		if (error) throw error;
 		if(results.length > 0){
@@ -90,17 +99,16 @@ const statistics = function (req, res){
 				 myLng = results[k]["lng"];
 				 const start = {lat: latstat, lng: lngstat};
 				 const end = {lat: myLat, lng: myLng};
-
 				distance = geokit.distance(start,end);
 				if(distance < rad){
                     inRadio.push(results[k]);
 				}
 			}
 
-
 			let ratingSum = 0;
 			const len = inRadio.length;
 			let item = null;
+
 			//Average Rating 
 			for (let i = 0; i < len; i++) {
 		    	item = inRadio[i];
@@ -119,6 +127,8 @@ const statistics = function (req, res){
 			}
 
 			const stanDev = math.sqrt(stanSum/len);	
+
+			//Return JSON 
 			res.json({count: len, avg: averageRating, std: stanDev})
 			
 
