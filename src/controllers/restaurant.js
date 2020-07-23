@@ -31,10 +31,6 @@ const getRestaurants = function (req, res){
 }
 
 const createRestaurant = function (req, res){
-	if(req.body.id == null || req.body.rating == null || req.body.name == null || req.body.site == null || req.body.email == null || req.body.phone == null || req.body.street == null
-	 || req.body.city == null || req.body.state == null || req.body.lat == null || req.body.lng == null){
-		res.status(400).send('Please give all the information');
-	}
 	const sql = 'INSERT INTO restaurants SET ?'; 
 	const restaurantObj = {
 		id: req.body.id,
